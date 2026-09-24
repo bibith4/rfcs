@@ -87,8 +87,7 @@ identities — exactly what the anti-join needs.
 
 ### Goals
 
-* Deliver row-level incremental refresh for aggregating MVs (all aggregation functions via
-  Case B expansion; SUM/COUNT additionally via classical IVM).
+* Deliver row-level incremental refresh for aggregating MVs
 * Deliver row-level incremental stitching at query time as a third candidate the cost-based
   picker considers alongside partition-level stitching and full recompute.
 * Keep existing connectors completely unaffected via default no-op SPI implementations.
@@ -98,13 +97,11 @@ identities — exactly what the anti-join needs.
 
 ### Non-Goals
 
-* Row-preserving MVs with joins between base tables (v2 task `mv-row-preserving-multi-base`).
+* Row-level refresh of row-preserving MVs, joins, or UNION-defined MVs.
 * Classical IVM for AVG/STDDEV/MIN/MAX (v2 tasks `mv-row-level-classical-ivm-avg-stddev`,
   `mv-row-level-classical-ivm-min-max`).
 * Distributed execution of the change-set scan — v1 runs COORDINATOR_ONLY (v2 task
   `mv-row-level-distribute-changes-tvf`).
-* `affected_identifiers` CTE sharing (v2 task `mv-row-level-cte-share`).
-* Non-Iceberg connectors (Delta, JDBC) — independent v2 tasks.
 * Benchmarking and threshold tuning.
 * Backfilling row lineage on existing Iceberg V2 tables.
 
